@@ -21,10 +21,10 @@ function App() {
         <Grid container spacing={5}>
           <Grid item="true" md={6}>
             <SliderSelect data={data} setData={setData} />
-            <Tenure />
+            <Tenure data={data} setData={setData} />
           </Grid>
           <Grid item="true" md={6}>
-            <Result />
+            <Result data={data} />
           </Grid>
         </Grid>
       </Container>
