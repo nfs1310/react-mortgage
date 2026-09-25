@@ -1,18 +1,19 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { Stack, Typography } from '@mui/material';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Result = ({ data }) => {
   const { homeValue, downPayment, interestRate, loanAmount, loanTerm } = data;
-  
+
   const totalLoanMonths = loanTerm * 12;
   const interestPerMonth = interestRate / 100 / 12;
 
-  const monthlyPayment = 
-  (loanAmount * 
-    interestPerMonth * (1 + interestPerMonth) ** totalLoanMonths) / 
+  const monthlyPayment =
+    (loanAmount *
+      interestPerMonth * (1 + interestPerMonth) ** totalLoanMonths) /
     ((1 + interestPerMonth) ** totalLoanMonths - 1);
   const totalInterestGenerated = monthlyPayment * totalLoanMonths - loanAmount;
 
@@ -43,9 +44,16 @@ const Result = ({ data }) => {
     ],
   };
   return (
-    <div>
-      <Pie data={pieChartData} />
-    </div>
+    <Stack gap={3}>
+      <Typography variant="h5" textAlign="center">
+        Monthly Payment: ${monthlyPayment.toFixed(2)}
+      </Typography>
+      <Stack direction="row" justifyContent="center">
+      <div>
+        <Pie data={pieChartData} />
+      </div>
+      </Stack>
+    </Stack>
   )
 }
 
